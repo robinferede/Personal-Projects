@@ -1,15 +1,17 @@
 var s;
 var p;
 var scl = 30;
-var cols = 40;
-var rows = 40;
+var cols = 20;
+var rows = 20;
 var food;
 var snakes = [];
 var heads = [];
 
+var multiplayer = false;
+
 function setup() {
   createCanvas(cols*scl,rows*scl);
-  frameRate(60);
+  frameRate(5);
   pickLocation();
   s = new Snake();
   p = new Snake();
@@ -35,10 +37,9 @@ function draw() {
   s.death();
 
   if (!p.dead && !s.dead) {
+      if (!multiplayer) s.AI();
       s.update();
-      s.AI();
       p.update();
-      p.AI();
   } else if (p.counter > 10 || s.counter > 10) {
       s.counter = 0;
       p.counter = 0;
